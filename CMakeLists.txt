@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
-set(This src)
+set(This main)
 
-file(GLOB SOURCES "*.cpp" "*.h")
+project(${This} C CXX)
 
-add_executable(${This} ${SOURCES})
+#add_subdirectory(example1)
