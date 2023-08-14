@@ -5,4 +5,4 @@ project(${This} C CXX)
 
 file(GLOB SOURCES "*.cpp" "*.h")
 
-add_executable(${This} ${SOURCES})
+#add_executable(${This} ${SOURCES})
