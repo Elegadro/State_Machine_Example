@@ -34,7 +34,7 @@ class Document is
 
 # State Machine Neden Kullanılır?
 
-Koşullara dayalı bir state makinesinin en büyük zayıflığı `Document` sınıfına giderek daha fazla durum ve duruma bağlı davranışlar eklemeye başladığınızda ortaya çıkar [bkz. örnek](example1/main.cpp.TEMPLATE).
+Koşullara dayalı bir state makinesinin en büyük zayıflığı `Document` sınıfına giderek daha fazla durum ve duruma bağlı davranışlar eklemeye başladığınızda ortaya çıkar [bkz. örnek](example1/main.cpp).
 
 Çoğu yöntem, mevcut duruma göre bir yöntemin uygun davranışını seçen devasa koşullar içerecektir. Bu gibi kodların bakımı zordur çünkü geçiş mantığında ki herhangi bir değişiklik her yöntemdeki durum koşullarının değiştirilmesini gerektirebilir. 
 
