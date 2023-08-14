@@ -1,11 +1,9 @@
 # State Machine Nedir?
-State machine, bir nesnenin iç durumu değiştiğinde davranışını değiştirmesini sağlayan davranışsal bir tasarım modelidir. Sanki nesne sınıfını değiştirmiş gibi olur.
+State machine, bir nesnenin iç durumu değiştiğinde davranışını değiştirmesini sağlayan davranışsal bir tasarım modelidir. *Finite-state machine* konsepti ile yakından ilişkildir.
 
-State modeli, *finite-state machine* konsepti ile yakından ilişkildir.
+Ana fikir, verilen herhangi bir anda programın bulunacbileceği sonlu sayıda durumların (state) olmasıdır. Her bir benzersiz durumda program farklı çalışır ve program bir durumdan başka bir duruma anına geçebilir. Ancak, mevcut duruma bağlı olmak üzere program belirli başka  durumlara geçebilir veya geçmeyebilir. Bunlar geçiş kurallarıdır, sonlu ve önceden tanımlanmış bu geçiş kurallarına  *transition* denir.
 
-Ana fikir, verilen herhangi bir anda programın bulunacileceği sonlu sayıda durumların (state) olmasıdır. Her bir benzersiz durumda program farklı çalışır ve program bir durumdan başka bir duruma anına geçebilir. Ancak, mevcut duruma bağlı olmak üzere program belirli başka  durumlara geçebilir veya geçmeyebilir. Bunlar geçiş kurallarıdır, sonlu ve önceden tanımlanmış bu geçiş kurallarına  *transition* denir.
-
-Bu yaklaşımı nesnelere de uygulayabilirsiniz. `Document` adlı bir klasımızın olduğunu varsayalım. Doküman şu üç durumdan herhangi birinde olabilir: `Draft`, `Moderation` ve `Published`. Dokümanın `publish` metodu her bir durumda farklı çalışır.
+Bu yaklaşımı nesnelere de uygulayabilirsiniz. `Document` adlı bir sınıfımızın olduğunu varsayalım. Doküman şu üç durumdan herhangi birinde olabilir: `Draft`, `Moderation` ve `Published`. Dokümanın `publish` metodu her bir durumda farklı çalışır.
 
 - `Draft` durumunda, dokümanı moderasyona taşır.
 
@@ -14,7 +12,6 @@ Bu yaklaşımı nesnelere de uygulayabilirsiniz. `Document` adlı bir klasımız
 - `Published` durumunda ise hiçbir şey yapmaz.
 
 State machines genellikle nesnenin mevcut durumuna bağlı olarak uygun davranışı seçen çok sayıda koşullu ifade (if-switch) ile uygulanır. Genellikle bu "durum" obje alanında bir değeri atar. *finiti-state* makineleri daha önce hiç duymamış olsanız bile muhtemelen en az bir kez state machine uygulamışsınızdır.
-Aşağıda ki kod tanıdık geldi mi?
 
 ```c++
 class Document is
@@ -45,4 +42,28 @@ Problem proje geliştikçe daha da büyük olabilir. Tasarım aşamasında olas�
 
 # State Machine Nasıl Kullanılır?
 
-State modeli, bir nesnenin olası tüm durumlar için yeni sınıflar oluşturmanızı ve duruma özgü tüm davranışları bu sınıflara çıkarmanızı önerir. 
+State modeli, bir nesnenin olası tüm durumlar için yeni sınıflar oluşturmanızı ve duruma özgü tüm davranışları bu sınıflara çıkarmanızı önerir.
+
+Tüm davranışları kendi başına uygulamak yerine, *context* adı verilen orijinal nesne, mevcut durumunu temsil eden state nesnelerinden birine bir referans saklar ve durumla ilgili tüm işleri bu nesneye devreder.
+
+1. Hangi sınıfın *context* olacağına karar verin. Bu, state bağlı koda zaten sahip olan mevcut bir sınıf olabileceği gibi state'e özgü birden fazla sınıfa dağıtılmışsa yeni bir sınıf da olabilir.
+
+2. State interface'i belirleyin. Duruma özgü davranış içerebilecek olanları hedefleyin.
+
+3. Her bir durum için, state interface'den üretilmiş sınıflar oluşturun. Context'in metodlarını gözden geçirin ve bu durumla ilgili tüm kodu yeni oluşturduğunuz sınıfa alın.
+
+    Kodu state klasına alırken, context'in private üyelere bağlı olduğunu görebilirsiniz. Bunun için bir kaç çözüm vardır,
+
+    - Bu alanların veya metodların public yapın.
+
+    - State sınıflarını, context sınıfının içine yerleştirin. Ancak bunu yapabilmeniz için kullanılan dilin iç içe sınıfları desteklemesi gerekmektedir.
+
+4. Context sınıfında, state interface türünde bir referans alanı ekleyin ve bu alanda bulunan değerleri değiştirebilecek public setter ekleyin.
+
+5. Context metodunun tekrar gözden geçirin ve boş state koşullarını state nesnesinin ilgili yöntemlerine yapılan çağrılarla değiştirin.
+
+6. Context'in durumunu değiştirmek için, state sınıflarından birinin örneğini oluşturun ve context'e aktarın. Bunu context'in içerisinde veya istemcide yapabilirsiniz.
+
+[State Machine Örneği 1](./example2/main.cpp)
+
+[State Machine Örneği 2](./example3/main.cpp)
