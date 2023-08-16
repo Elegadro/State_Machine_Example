@@ -1,7 +1,7 @@
 # State Machine Nedir?
 State machine, bir nesnenin iç durumu değiştiğinde davranışını değiştirmesini sağlayan davranışsal bir tasarım modelidir. *Finite-state machine* konsepti ile yakından ilişkildir.
 
-Ana fikir, verilen herhangi bir anda programın bulunacbileceği sonlu sayıda durumların (state) olmasıdır. Her bir benzersiz durumda program farklı çalışır ve program bir durumdan başka bir duruma anına geçebilir. Ancak, mevcut duruma bağlı olmak üzere program belirli başka  durumlara geçebilir veya geçmeyebilir. Bunlar geçiş kurallarıdır, sonlu ve önceden tanımlanmış bu geçiş kurallarına  *transition* denir.
+Ana fikir, verilen herhangi bir anda programın bulunabileceği sonlu sayıda durumların (state) olmasıdır. Her bir benzersiz durumda program farklı çalışır ve program bir durumdan başka bir duruma geçebilir. Ancak, bulunduğu duruma bağlı olmak üzere program başka durumlara geçebilir veya geçmeyebilir. Bunlar geçiş kurallarıdır, sonlu ve önceden tanımlanmış bu geçiş kurallarına  *transition* denir.
 
 Bu yaklaşımı nesnelere de uygulayabilirsiniz. `Document` adlı bir sınıfımızın olduğunu varsayalım. Doküman şu üç durumdan herhangi birinde olabilir: `Draft`, `Moderation` ve `Published`. Dokümanın `publish` metodu her bir durumda farklı çalışır.
 
@@ -11,7 +11,7 @@ Bu yaklaşımı nesnelere de uygulayabilirsiniz. `Document` adlı bir sınıfım
 
 - `Published` durumunda ise hiçbir şey yapmaz.
 
-State machines genellikle nesnenin mevcut durumuna bağlı olarak uygun davranışı seçen çok sayıda koşullu ifade (if-switch) ile uygulanır. Genellikle bu "durum" obje alanında bir değeri atar. *finiti-state* makineleri daha önce hiç duymamış olsanız bile muhtemelen en az bir kez state machine uygulamışsınızdır.
+State machines genellikle nesnenin mevcut durumuna bağlı olarak uygun davranışı seçen çok sayıda koşullu ifade (if-switch) ile uygulanır. Genellikle bu "durum" obje alanında bir değeri atar. *Finiti-state* makineleri daha önce hiç duymamış olsanız bile muhtemelen en az bir kez state machine uygulamışsınızdır.
 
 ```c++
 class Document is
@@ -54,7 +54,7 @@ Tüm davranışları kendi başına uygulamak yerine, *context* adı verilen ori
 
     Kodu state klasına alırken, context'in private üyelere bağlı olduğunu görebilirsiniz. Bunun için bir kaç çözüm vardır,
 
-    - Bu alanların veya metodların public yapın.
+    - Bu alanların veya metodları public yapın.
 
     - State sınıflarını, context sınıfının içine yerleştirin. Ancak bunu yapabilmeniz için kullanılan dilin iç içe sınıfları desteklemesi gerekmektedir.
 

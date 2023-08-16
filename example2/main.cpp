@@ -24,6 +24,10 @@ public:
         this->context_ = context;
     }
 
+    /*
+    Bu fonksiyonlar, state interface nesnesinden üretilmiş
+    alt sınıflarda bu fonksiyonları tanımlamayı mecbur kılar.
+    */
     virtual void Handle1() = 0;
     virtual void Handle2() = 0;
 };
@@ -106,6 +110,7 @@ void ClientCode()
 {
     Context *context = new Context(new ConcreteStateA);
     context->Request1();
+    context->Request2();
     context->Request2();
     delete context;
 }

@@ -48,12 +48,12 @@ public:
         this->state_->set_context(this);
     }
 
-    void handleRequest1()
+    void Request1()
     {
         this->state_->handleRequest1();
     }
 
-    void handleRequest2()
+    void Request2()
     {
         this->state_->handleRequest2();
     }
@@ -94,7 +94,6 @@ public:
     void handleRequest2() override
     {
         std::cout << "Handle2.\n";
-        
     }
 
     void update() override
@@ -112,9 +111,8 @@ void HandleState1::handleRequest2()
 
 int main()
 {
-    cv::Mat image = cv::imread("../../example3/img/image.png");
+    cv::Mat image;
     Context *context = new Context(new HandleState1, image);
-    context->handleRequest1();
     while (true)
     {
         context->image = cv::imread("../../example3/img/image.png");
@@ -123,9 +121,9 @@ int main()
         if (c == 27)
             break;
         else if (c == '1')
-            context->handleRequest1();
+            context->Request1();
         else if (c == '2')
-            context->handleRequest2();
+            context->Request2();
     }
     return 0;
 }
